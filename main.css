@@ -1,4 +1,4 @@
 body {
-    background: linear-gradient(to bottom right, #FF0000, #0000FF); /*Couleur de fond de pages en dégradé*/
+    background: linear-gradient(to bottom right, #000000, #ddff00); /*Couleur de fond de pages en dégradé*/
     background-attachment: fixed; /*Pour éviter les duplicates*/
 }
