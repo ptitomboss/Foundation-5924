@@ -8,7 +8,7 @@
         <link rel="icon" href="../icon.png" type="image/svg+xml">
     </head>
     <body>
-        <form id="loginForm" action="#" novalidate>
+        <form id="loginForm" method="post" action="/login" novalidate>
             <label for="username">Nom d'utilisateur :</label>
             <input type="text" id="username" name="username" required><br><br>
             <label for="pwd">Mot de passe :</label>
@@ -16,29 +16,13 @@
             <input type="submit" value="Se connecter">
         </form>
         <div id="error" style="color:red;margin-top:8px" aria-live="polite"></div>
-
         <script>
         (function(){
-            // Identifiants de démonstration (exemple uniquement)
-            const correctUsername = 'admin';
-            const correctPassword = 'Secret123';
-
-            const form = document.getElementById('loginForm');
             const err = document.getElementById('error');
-
-            form.addEventListener('submit', function(e){
-                e.preventDefault();
-                err.textContent = '';
-                const u = document.getElementById('username').value.trim();
-                const p = document.getElementById('pwd').value;
-
-                if (u === correctUsername && p === correctPassword) {
-                    // Redirige vers la page suivante sur succès
-                    window.location.href = 'experiment-1.html';
-                } else {
-                    err.textContent = "Nom d'utilisateur ou mot de passe incorrect.";
-                }
-            });
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('error')) {
+                err.textContent = "Nom d'utilisateur ou mot de passe incorrect.";
+            }
         })();
         </script>
     </body>

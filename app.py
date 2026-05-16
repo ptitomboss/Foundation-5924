@@ -16,6 +16,7 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    experiments_dir = os.path.join(app.root_path, 'experiments')
     if request.method == 'POST':
         username = request.form.get('username', '').strip()
         password = request.form.get('pwd', '')
@@ -23,8 +24,11 @@ def login():
             session['logged_in'] = True
             return redirect(url_for('protected', filename='experiment-1.html'))
         else:
-            flash("Nom d'utilisateur ou mot de passe incorrect.")
-    return render_template('login.html')
+            # Redirige vers la même page avec un flag d'erreur lisible côté client
+            return redirect(url_for('login') + '?error=1')
+
+    # Sert le fichier experiments/experiments-ARCHIVED.html comme page de connexion
+    return send_from_directory(experiments_dir, 'experiments-ARCHIVED.html')
 
 
 @app.route('/logout')
