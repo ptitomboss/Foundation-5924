@@ -22,13 +22,28 @@ def login():
         password = request.form.get('pwd', '')
         if username == CORRECT_USERNAME and password == CORRECT_PASSWORD:
             session['logged_in'] = True
-            return redirect(url_for('protected', filename='experiment-1.html'))
+            return redirect(url_for('protected', filename='ARCHIVED-experiments/test.html'))
         else:
             # Redirige vers la même page avec un flag d'erreur lisible côté client
             return redirect(url_for('login') + '?error=1')
 
     # Sert le fichier experiments/experiments-ARCHIVED.html comme page de connexion
     return send_from_directory(experiments_dir, 'experiments-ARCHIVED.html')
+
+
+@app.route('/main.css')
+def main_css():
+    return send_from_directory(app.root_path, 'main.css')
+
+
+@app.route('/icon.png')
+def icon_png():
+    return send_from_directory(app.root_path, 'icon.png')
+
+
+@app.route('/experiments/experiments.css')
+def experiments_css():
+    return send_from_directory(os.path.join(app.root_path, 'experiments'), 'experiments.css')
 
 
 @app.route('/logout')
