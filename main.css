@@ -5,3 +5,7 @@ body {
 .white{
     color:white;
 }
+
+.invisible{
+    visibility: hidden;
+}
