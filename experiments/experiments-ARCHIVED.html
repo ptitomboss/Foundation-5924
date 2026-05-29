@@ -8,18 +8,16 @@
         <link rel="icon" href="../icon.png" type="image/svg+xml">
     <body>
         <p>You need to log into an account to continue.<strong style="color: red;">THIS IS NOT ALLOWED TO CONTINUE WITHOUT BEING CONNECTED INTO AN ACCOUNT</strong></p>
-        <form id="loginForm" action="#" novalidate>
-            <div style="text-align:center;">
-              <label for="username">Name :</label>
-              <input type="text" id="username" name="username" required>
-            </div><br>
-            <div style="text-align:center;">
-              <label for="pwd">Password :</label>
-              <input type="password" id="pwd" name="pwd" minlength="8" required>
-            </div><br>
-            <div style="text-align:center;">
-              <input type="submit" value="Connect">
+        <form id="loginForm" action="#" novalidate style="max-width:320px; margin:0 auto; text-align:center;">
+            <div style="margin-bottom:1rem;">
+              <label for="username" style="display:block; margin-bottom:0.25rem; text-align:left;">Name :</label>
+              <input type="text" id="username" name="username" required style="width:100%; max-width:280px; margin:0 auto; display:block;">
             </div>
+            <div style="margin-bottom:1rem;">
+              <label for="pwd" style="display:block; margin-bottom:0.25rem; text-align:left;">Password :</label>
+              <input type="password" id="pwd" name="pwd" minlength="8" required style="width:100%; max-width:280px; margin:0 auto; display:block;">
+            </div>
+            <input type="submit" value="Connect" style="width:100%; max-width:280px; margin:0 auto; display:block;">
         </form>
         <div id="error" style="color:red;margin-top:8px" aria-live="polite"></div>
 
