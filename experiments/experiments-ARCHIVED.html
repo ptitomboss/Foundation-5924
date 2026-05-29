@@ -9,11 +9,15 @@
     <body>
         <p>You need to log into an account to continue.<strong style="color: red;">THIS IS NOT ALLOWED TO CONTINUE WITHOUT BEING CONNECTED INTO AN ACCOUNT</strong></p>
         <form id="loginForm" action="#" novalidate>
-            <label for="username">Name :</label>
-            <input type="text" id="username" name="username" required><br><br>
-            <label for="pwd">Password :</label>
-            <input type="password" id="pwd" name="pwd" minlength="8" required><br><br>
-            <input type="submit" value="Connect">
+            <div style="text-align:center;">
+              <label for="username">Name :</label>
+              <input type="text" id="username" name="username" required style="float: center">
+            </div><br>
+            <div style="text-align:center;">
+              <label for="pwd">Password :</label>
+              <input type="password" id="pwd" name="pwd" minlength="8" required style="float: center">
+            </div><br>
+            <input type="submit" value="Connect" style="float: center">
         </form>
         <div id="error" style="color:red;margin-top:8px" aria-live="polite"></div>
 
