@@ -7,5 +7,5 @@ body {
 }
 
 .invisible{
-    visibility: hidden;
+    color: transparent;
 }
