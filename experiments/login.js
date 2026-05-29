@@ -9,10 +9,10 @@
     form.addEventListener('submit', function(e){
         e.preventDefault();
         err.textContent = '';
-        const u = document.getElementById('username').value.trim();
-        const p = document.getElementById('pwd').value;
+        const username = document.getElementById('username').value.trim();
+        const passwords = document.getElementById('pwd').value;
 
-        if (u === correctUsername && p === correctPassword) {
+        if (username === correctUsername && passwords === correctPassword) {
             // Redirige vers la page suivante
             window.location.href = 'ARCHIVED-experiments/menu_of_ARCHIVED-experiments.html';
         } else {
