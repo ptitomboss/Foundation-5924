@@ -16,7 +16,7 @@
             // Redirige vers la page suivante
             window.location.href = 'ARCHIVED-experiments/menu_of_ARCHIVED-experiments.html';
         } else {
-            err.textContent = "Nom d'utilisateur ou mot de passe incorrect.";
+            err.textContent = "The username or password is incorrect.";
         }
     });
 })();
