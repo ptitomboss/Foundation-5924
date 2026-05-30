@@ -1,7 +1,7 @@
 // Gestion du formulaire de connexion
 (function(){
     const correctUsername = 'Dr. Robutstern';
-    const correctPassword = 'my_love_in_this_foundation-5924.124';
+    const correctPassword = 'my_greatest_creation.';
 
     const form = document.getElementById('loginForm');
     const err = document.getElementById('error');
