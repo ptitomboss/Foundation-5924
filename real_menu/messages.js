@@ -3,5 +3,6 @@ window.randomMessages = [
 	"Some things are better forgotten than remembered.",
 	"Experiment-124 remains under observation.",
 	"Archive integrity check: passed.",
-	"Do not respond to voices recorded after midnight."
+	"Do not respond to voices recorded after midnight.",
+    "ERROR: Something tried to breach the foundation's code."
 ];
