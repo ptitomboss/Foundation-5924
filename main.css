@@ -9,3 +9,48 @@ body {
 .invisible{
     color: transparent;
 }
+
+.message-notification{
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 10;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    width: min(420px, calc(100vw - 40px));
+    padding: 16px;
+    border-left: 4px solid #d9ff00;
+    background: #111;
+    color: #fff;
+    box-shadow: 0 4px 18px #0008;
+}
+
+.message-notification[hidden]{
+    display: none;
+}
+
+.message-notification__text{
+    flex: 1;
+    margin: 0;
+}
+
+.message-notification__dismiss{
+    flex: 0 0 32px;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #777;
+    background: transparent;
+    color: #fff;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+@media (max-width: 480px){
+    .message-notification{
+        right: 12px;
+        bottom: 12px;
+        width: calc(100vw - 24px);
+    }
+}
