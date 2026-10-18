@@ -10,6 +10,80 @@ body {
     color: transparent;
 }
 
+body::before,
+body::after{
+    position: fixed;
+    inset: 0;
+    z-index: 5;
+    content: "";
+    pointer-events: none;
+    opacity: 0;
+}
+
+body::before{
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 3px,
+        #0005 4px
+    );
+}
+
+body::after{
+    inset: 0 auto auto 0;
+    z-index: 6;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, #f33, transparent 35%, #5ff);
+}
+
+html[data-countdown-damage="1"] body::before{
+    opacity: .06;
+}
+
+html[data-countdown-damage="2"] body::before{
+    opacity: .12;
+}
+
+html[data-countdown-damage="3"] body::before{
+    opacity: .2;
+}
+
+html[data-countdown-damage="3"] h1,
+html[data-countdown-damage="3"] h2{
+    text-shadow: 1px 0 #f33, -1px 0 #5ff;
+}
+
+html[data-countdown-damage="4"] body::before,
+html[data-countdown-damage="5"] body::before{
+    opacity: .28;
+}
+
+html[data-countdown-damage="4"] body::after{
+    opacity: .45;
+    animation: countdown-glitch 6s steps(1, end) infinite;
+}
+
+html[data-countdown-damage="5"] body::before{
+    opacity: .4;
+}
+
+html[data-countdown-damage="5"] body::after{
+    opacity: .75;
+    animation: countdown-glitch 1.5s steps(1, end) infinite;
+}
+
+@keyframes countdown-glitch{
+    0%, 90%, 100%{ transform: translateY(-5px); }
+    92%{ transform: translateY(25vh); }
+    94%{ transform: translateY(70vh); }
+    96%{ transform: translateY(45vh); }
+}
+
+@media (prefers-reduced-motion: reduce){
+    body::after{ animation: none !important; }
+}
+
 .message-notification{
     position: fixed;
     right: 20px;
