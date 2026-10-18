@@ -16,10 +16,11 @@
 		const countdownOutput = document.getElementById("countdown");
 
 		if (countdownOutput) {
+            const days = Math.floor(secondsRemaining / 86400);
 			const hours = Math.floor(secondsRemaining / 3600);
 			const minutes = Math.floor((secondsRemaining % 3600) / 60);
 			const seconds = secondsRemaining % 60;
-			countdownOutput.textContent = [hours, minutes, seconds]
+			countdownOutput.textContent = [days, hours, minutes, seconds]
 				.map((value) => String(value).padStart(2, "0"))
 				.join(":");
 		}
