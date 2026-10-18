@@ -1,12 +1,5 @@
 (() => {
-	const durationMilliseconds = (60 * 60 * 528) * 1000;
-	const deadlineKey = "foundation-5924-site-deadline";
-	let deadline = Number(window.localStorage.getItem(deadlineKey));
-
-	if (!Number.isFinite(deadline) || deadline <= 0) {
-		deadline = Date.now() + durationMilliseconds;
-		window.localStorage.setItem(deadlineKey, String(deadline));
-	}
+	const deadline = Date.parse("2026-10-31T12:00:00Z");
 
 	const shutdownPage = new URL("errors pages/site_down.html", document.currentScript.src);
 	let countdownTimer;
@@ -17,12 +10,10 @@
 
 		if (countdownOutput) {
             const days = Math.floor(secondsRemaining / 86400);
-			const hours = Math.floor(secondsRemaining / 3600);
+			const hours = Math.floor((secondsRemaining % 86400) / 3600);
 			const minutes = Math.floor((secondsRemaining % 3600) / 60);
 			const seconds = secondsRemaining % 60;
-			countdownOutput.textContent = [days, hours, minutes, seconds]
-				.map((value) => String(value).padStart(3, "0"))
-				.join(":");
+			countdownOutput.textContent = `${String(days).padStart(2, "0")}:${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 		}
 
 		if (secondsRemaining === 0) {
