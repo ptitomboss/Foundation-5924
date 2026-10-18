@@ -21,7 +21,7 @@
 			const minutes = Math.floor((secondsRemaining % 3600) / 60);
 			const seconds = secondsRemaining % 60;
 			countdownOutput.textContent = [days, hours, minutes, seconds]
-				.map((value) => String(value).padStart(2, "0"))
+				.map((value) => String(value).padStart(3, "0"))
 				.join(":");
 		}
 
