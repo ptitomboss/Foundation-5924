@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(to bottom, #000000, #d9ff00); /*Couleur de fond de pages en dégradé*/
+    background: linear-gradient(to bottom, #000000, yellow); /*Couleur de fond de pages en dégradé*/
     background-attachment: fixed; /*Pour éviter les duplicates*/
 }
 .white{
@@ -94,7 +94,7 @@ html[data-countdown-damage="5"] body::after{
     gap: 16px;
     width: min(420px, calc(100vw - 40px));
     padding: 16px;
-    border-left: 4px solid #d9ff00;
+    border-left: 4px solid yellow;
     background: #111;
     color: #fff;
     box-shadow: 0 4px 18px #0008;

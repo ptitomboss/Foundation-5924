@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-	const minimumDelay = 60 * 1000;
-	const maximumDelay = 3 * 60 * 60 * 1000;
+	const minimumDelay = 5 * 1000;
+	const maximumDelay = 10 * 60 * 1000;
 	const messages = Array.isArray(window.randomMessages)
 		? window.randomMessages.filter((message) => typeof message === "string" && message.trim())
 			.map((message) => message.trim())
