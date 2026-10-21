@@ -7,7 +7,7 @@
 	// Build these links from this script's location, even on pages in subfolders.
 	const shutdownPage = new URL("errors pages/site_down.html", document.currentScript.src);
 	const fakeErrorPage = new URL("errors pages/Fake_error.html", document.currentScript.src);
-	const errorChance = 0.12;
+	const errorChance = 0.10;
 	let countdownTimer;
 	// Change the page text only once each time the page loads.
 	let pageTextDistorted = false;
@@ -24,10 +24,11 @@
 			// Use a random variation if the browser can't save this count.
 		}
 
-		// Use these symbols to make the text look corrupted.
+		// Mix block symbols and glitch marks into the text.
 		const glyphs = ["█", "▓", "▒", "░", "▧"];
-		// Leave scripts, form fields, hidden content, and the countdown alone.
-		const excludedElements = "script, style, noscript, textarea, input, select, option, [aria-hidden='true'], #countdown";
+		const glitchMarks = ["\u0336", "\u0338", "\u035F"];
+		// Leave scripts, form fields, hidden content, invisible text, and the countdown alone.
+		const excludedElements = "script, style, noscript, textarea, input, select, option, [aria-hidden='true'], .invisible, #countdown, [aria-live]";
 		// Collect text nodes first so the new styled spans aren't processed again.
 		const walker = document.createTreeWalker(document.body, window.NodeFilter.SHOW_TEXT);
 		const textNodes = [];
@@ -43,24 +44,38 @@
 				continue;
 			}
 
-			// Only replace letters; keep spaces and punctuation unchanged.
+			// Add glitches to some letters, while leaving spaces and punctuation alone.
 			const letterMatches = [...textNode.data.matchAll(/[A-Za-z]/g)];
 			if (letterMatches.length === 0) {
 				continue;
 			}
 
-			// Use the reload count and text position to choose a letter and symbol.
-			const variantOffset = variant + nodeIndex;
-			const target = letterMatches[variantOffset % letterMatches.length];
-			const changedText = textNode.data.slice(0, target.index)
-				+ glyphs[variantOffset % glyphs.length]
-				+ textNode.data.slice(target.index + 1);
+			const targetIndex = (variant + nodeIndex) % letterMatches.length;
+			let changedText = "";
+			let lastIndex = 0;
+			for (const [letterIndex, letterMatch] of letterMatches.entries()) {
+				changedText += textNode.data.slice(lastIndex, letterMatch.index);
+				const shouldGlitch = letterIndex === targetIndex || Math.random() < 0.25;
+				if (shouldGlitch && Math.random() < 0.65) {
+					changedText += glyphs[Math.floor(Math.random() * glyphs.length)];
+				} else if (shouldGlitch) {
+					changedText += letterMatch[0] + glitchMarks[Math.floor(Math.random() * glitchMarks.length)];
+				} else {
+					changedText += letterMatch[0];
+				}
+				lastIndex = letterMatch.index + letterMatch[0].length;
+			}
+			changedText += textNode.data.slice(lastIndex);
+
 			const styledText = document.createElement("span");
 			styledText.textContent = changedText;
 			if (Math.random() < 0.5) {
 				styledText.style.fontWeight = "bold";
 			} else {
 				styledText.style.fontStyle = "italic";
+			}
+			if (Math.random() < 0.5) {
+				styledText.style.textShadow = "1px 0 #ff3b3b, -1px 0 #41e8ff";
 			}
 			textNode.replaceWith(styledText);
 			nodeIndex += 1;
