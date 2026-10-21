@@ -1,3 +1,4 @@
+// Shared message list read by real_menu_script.js when it initializes.
 window.randomMessages = [
 	"I SEE YOU.",
 	"Some things are better forgotten than remembered.",
