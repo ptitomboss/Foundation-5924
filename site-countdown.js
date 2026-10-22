@@ -37,8 +37,8 @@
 		let textNode;
 		let nodeIndex = 0;
 		let destruction = 1.0;
-		if (days < 7) {
-			destruction = 1.75 / (days + 1);
+		if (days <= 7) {
+			destruction = Math.floor((1 + 0.75 / (days + 1))* 10) / 10;
 		}
 
 		while ((textNode = walker.nextNode())) {
