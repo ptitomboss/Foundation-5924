@@ -27,6 +27,8 @@
 		// Mix block symbols and glitch marks into the text.
 		const glyphs = ["█", "▓", "▒", "░", "▧"];
 		const glitchMarks = ["\u0336", "\u0338", "\u035F"];
+		// Occasionally replace these letters or "to" with their number lookalikes.
+		const numberReplacements = { to: "2", o: "0", i: "1", e: "3", a: "4", s: "5" };
 		// Leave scripts, form fields, hidden content, invisible text, and the countdown alone.
 		const excludedElements = "script, style, noscript, textarea, input, select, option, [aria-hidden='true'], .invisible, #countdown, [aria-live]";
 		// Collect text nodes first so the new styled spans aren't processed again.
@@ -44,8 +46,8 @@
 				continue;
 			}
 
-			// Add glitches to some letters, while leaving spaces and punctuation alone.
-			const letterMatches = [...textNode.data.matchAll(/[A-Za-z]/g)];
+			// Add glitches and occasional number substitutions, leaving spaces and punctuation alone.
+			const letterMatches = [...textNode.data.matchAll(/to|[A-Za-z]/gi)];
 			if (letterMatches.length === 0) {
 				continue;
 			}
@@ -56,7 +58,10 @@
 			for (const [letterIndex, letterMatch] of letterMatches.entries()) {
 				changedText += textNode.data.slice(lastIndex, letterMatch.index);
 				const shouldGlitch = letterIndex === targetIndex || Math.random() < 0.25;
-				if (shouldGlitch && Math.random() < 0.65) {
+				const numberReplacement = numberReplacements[letterMatch[0].toLowerCase()];
+				if (shouldGlitch && numberReplacement && Math.random() < 0.5) {
+					changedText += numberReplacement;
+				} else if (shouldGlitch && Math.random() < 0.65) {
 					changedText += glyphs[Math.floor(Math.random() * glyphs.length)];
 				} else if (shouldGlitch) {
 					changedText += letterMatch[0] + glitchMarks[Math.floor(Math.random() * glitchMarks.length)];
