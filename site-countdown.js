@@ -12,7 +12,7 @@
 	// Change the page text only once each time the page loads.
 	let pageTextDistorted = false;
 
-	function distortPageText() {
+	function distortPageText(days) {
 		// Track reloads separately for each page in this browser tab.
 		const variantKey = `foundation-5924-text-variant:${window.location.pathname}`;
 		let variant = Math.floor(Math.random() * 1000);
@@ -36,6 +36,10 @@
 		const textNodes = [];
 		let textNode;
 		let nodeIndex = 0;
+		let destruction = 1.0;
+		if (days < 7) {
+			destruction = 1.75 / (days + 1);
+		}
 
 		while ((textNode = walker.nextNode())) {
 			textNodes.push(textNode);
@@ -59,9 +63,9 @@
 				changedText += textNode.data.slice(lastIndex, letterMatch.index);
 				const shouldGlitch = letterIndex === targetIndex || Math.random() < 0.25;
 				const numberReplacement = numberReplacements[letterMatch[0].toLowerCase()];
-				if (shouldGlitch && numberReplacement && Math.random() < 0.5) {
+				if (shouldGlitch && numberReplacement && Math.random() < 0.25 * destruction) {
 					changedText += numberReplacement;
-				} else if (shouldGlitch && Math.random() < 0.65) {
+				} else if (shouldGlitch && Math.random() < 0.20 * destruction) {
 					changedText += glyphs[Math.floor(Math.random() * glyphs.length)];
 				} else if (shouldGlitch) {
 					changedText += letterMatch[0] + glitchMarks[Math.floor(Math.random() * glitchMarks.length)];
@@ -74,12 +78,12 @@
 
 			const styledText = document.createElement("span");
 			styledText.textContent = changedText;
-			if (Math.random() < 0.5) {
+			if (Math.random() < 0.35 * destruction) {
 				styledText.style.fontWeight = "bold";
-			} else {
+			} else if (Math.random() < 0.35 * destruction) {
 				styledText.style.fontStyle = "italic";
 			}
-			if (Math.random() < 0.5) {
+			if (Math.random() < 0.1 * destruction) {
 				styledText.style.textShadow = "1px 0 #ff3b3b, -1px 0 #41e8ff";
 			}
 			textNode.replaceWith(styledText);
@@ -126,10 +130,11 @@
 	function updateCountdown() {
 		// Count down to the shared end time, in whole seconds.
 		const secondsRemaining = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
+		const days = Math.floor(secondsRemaining / 86400);
 		const countdownOutput = document.getElementById("countdown");
 		// Start changing the text once, during the last ten days.
 		if (!isErrorPage && secondsRemaining < 10 * 24 * 60 * 60 && !pageTextDistorted && document.body) {
-			distortPageText();
+			distortPageText(days);
 			pageTextDistorted = true;
 		}
 
@@ -146,7 +151,6 @@
 
 		if (countdownOutput) {
 			// Show the remaining time as days:hours:minutes:seconds.
-            const days = Math.floor(secondsRemaining / 86400);
 			const hours = Math.floor((secondsRemaining % 86400) / 3600);
 			const minutes = Math.floor((secondsRemaining % 3600) / 60);
 			const seconds = secondsRemaining % 60;
