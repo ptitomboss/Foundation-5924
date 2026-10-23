@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Site unavailable</title>
-        <link rel="stylesheet" href="../main.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex">
+        <title>503 Service Unavailable</title>
+        <link rel="stylesheet" href="errors.css">
     </head>
     <body>
-        <h1 class="white">Site unavailable</h1>
-        <p class="white">This site is currently offline.</p>
+        <main class="error-page">
+            <section class="error-card" aria-labelledby="error-title">
+                <h1 id="error-title">503 Service Unavailable</h1>
+                <p class="error-message">The server is temporarily unable to handle your request. Please try again later.</p>
+            </section>
+        </main>
     </body>
 </html>

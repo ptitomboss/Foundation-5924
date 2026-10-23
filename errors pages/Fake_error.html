@@ -1,13 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>File not found.</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex">
+        <title>500 Internal Server Error</title>
+        <link rel="stylesheet" href="errors.css">
         <script src="../site-countdown.js"></script>
     </head>
     <body>
-        <p style="font-size: large;">File not found. Please try to reload the page.</p>
+        <main class="error-page">
+            <section class="error-card" aria-labelledby="error-title">
+                <h1 id="error-title">500 Internal Server Error</h1>
+                <p class="error-message">The server encountered an unexpected condition and could not complete your request. Please try again later.</p>
+            </section>
+        </main>
         <!--Dr. Robutstern-->
     </body>
 </html>
