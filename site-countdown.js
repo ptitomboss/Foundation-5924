@@ -36,10 +36,7 @@
 		const textNodes = [];
 		let textNode;
 		let nodeIndex = 0;
-		let destruction = 1.0;
-		if (days <= 8) {
-			destruction = Math.floor((1 + 0.75 / (days + 1))* 100) / 100;
-		}
+		let destruction = Math.floor((1 + (1.25 / (days + 1)))* 100) / 100;
 
 		while ((textNode = walker.nextNode())) {
 			textNodes.push(textNode);
