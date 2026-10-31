@@ -3,7 +3,7 @@
 	const deadline = Date.parse("2026-10-31T14:00:00Z");
 	// Don't add effects or fake errors to error pages.
 	const isErrorPage = decodeURIComponent(window.location.pathname).includes("/errors pages/");
-
+ 
 	// Build these links from this script's location, even on pages in subfolders.
 	const shutdownPage = new URL("errors pages/site_down.html", document.currentScript.src);
 	const fakeErrorPage = new URL("errors pages/Fake_error.html", document.currentScript.src);
