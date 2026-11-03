@@ -1,6 +1,6 @@
 (() => {
 	// Use the same UTC end time for every visitor.
-	const deadline = Date.parse("2026-11-5T12:00:00Z");
+	const deadline = Date.parse("2026-11-05T12:00:00Z");
 	// Don't add effects or fake errors to error pages.
 	const isErrorPage = decodeURIComponent(window.location.pathname).includes("/errors pages/");
   
