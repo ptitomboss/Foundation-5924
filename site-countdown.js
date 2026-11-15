@@ -1,6 +1,6 @@
 (() => {
 	// Use the same UTC end time for every visitor.
-	const deadline = Date.parse("2026-11-17T14:00:00Z");
+	const deadline = Date.parse("2026-11-30T14:00:00Z");
 	// Don't add effects or fake errors to error pages.
 	const isErrorPage = decodeURIComponent(window.location.pathname).includes("/errors pages/");
   
@@ -151,7 +151,15 @@
 			const hours = Math.floor((secondsRemaining % 86400) / 3600);
 			const minutes = Math.floor((secondsRemaining % 3600) / 60);
 			const seconds = secondsRemaining % 60;
-			countdownOutput.textContent = `${String(days).padStart(2, "0")}:${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+			if (days > 0) {
+				countdownOutput.textContent = `${String(days).padStart(2, "0")}:${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+			} else if (hours > 0) {
+				countdownOutput.textContent = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+			} else if (minutes > 0) {
+				countdownOutput.textContent = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+			} else {
+				countdownOutput.textContent = `00:${String(seconds).padStart(2, "0")}`;
+			}
 		}
 
 		if (secondsRemaining === 0) {
